@@ -2,7 +2,7 @@
 using namespace std;
 
 const int maxN = 1e3, maxM = 1e3;
-int arr[maxN + 1][maxM + 1];;
+int arr[maxN + 1][maxM + 1];
 int dp[maxN + 1][maxM + 1];
 int n, m;
 
