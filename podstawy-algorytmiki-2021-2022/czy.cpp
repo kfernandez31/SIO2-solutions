@@ -33,7 +33,7 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    prepareLowestDivArray(); //TODO: robić to jakoś dynamicznie?
+    prepareLowestDivArray();
     cin >> t;
 
     for (int i = 0; i < t; i++) {
