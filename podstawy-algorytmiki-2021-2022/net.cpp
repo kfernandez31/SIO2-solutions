@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T> class graph {
+template <typename T> class Graph {
 private:
     struct node {
         T rep;
@@ -36,7 +36,7 @@ public:
     }
 };
 
-graph<string> g;
+Graph<string> g;
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);

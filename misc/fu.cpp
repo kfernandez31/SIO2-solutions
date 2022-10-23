@@ -1,15 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct set {
+struct node {
     int rep;
     int size;
-}
+};
 
-const int maxN = ???;
+const int maxN = 1e6;
 int n;
 int components;
-set graph[maxN];
+node graph[maxN];
 
 
 int find(int x) {
@@ -20,7 +20,7 @@ int find(int x) {
 }
 
 void join(int x, int y) {
-    if (find(graph[x] == find(graph[y]) {
+    if (find(graph[x]) == find(graph[y])) {
         return;
     }
     if (graph[x].size < graph[y].size) {
@@ -29,11 +29,4 @@ void join(int x, int y) {
     graph[x].size += graph[y].size;
     graph[y].rep = graph[x].rep;
     components--;
-}
-
-int main() {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    
-
-    return 0;
 }
