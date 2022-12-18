@@ -12,8 +12,7 @@ long long solve() {
     long long res = 0ll;
     int cnt[2] = {0, 0};
 
-    auto cmp = [&](pair<int, bool> a, pair<int, bool> b) { return a.first > b.first; };
-    sort(cuts, cuts + n + m - 2, cmp);
+    sort(cuts, cuts + n + m - 2);
 
     for (int i = 0; i < n + m - 2; i++) {
         res += (1 + cnt[1 - cuts[i].second]) * cuts[i].first;

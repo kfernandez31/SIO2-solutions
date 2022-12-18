@@ -1,42 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T> class Graph {
-private:
-    struct node {
-        T rep;
-        int size;
-    };
-    map<T, node> nodes;
-public:
-    bool contains(T x) {
-        return nodes.contains(x);
-    }
+const string NONE = "";
 
-    void insert(T x) {
-        nodes[x] = { x, 1 };
-    }
+unordered_map<string, string> parent;
+unordered_map<string, int> set_size;
 
-    T find(T x) {
-        if (nodes[x].rep != x) {
-            nodes[x].rep = find(nodes[x].rep);
-        }
-        return nodes[x].rep;
+string find_set(string v) {
+    if (parent.find(v) == parent.end()) {
+        return NONE;
     }
+    if (v == parent[v]) {
+        return v;
+    }
+    return parent[v] = find_set(parent[v]);
+}
 
-    void join(T x, T y) {
-        if (find(x) == find(y)) {
-            return;
-        }
-        if (nodes[x].size < nodes[y].size) {
+void union_sets(string x, string y) {
+    x = find_set(x);
+    y = find_set(y);
+    if (x != y) {
+        if (set_size[x] < set_size[y]) {
             swap(x, y);
         }
-        nodes[x].size += nodes[y].size;
-        nodes[y].rep = nodes[x].rep;
+        parent[y] = x;
+        set_size[x] += set_size[y];
     }
-};
+}
 
-Graph<string> g;
+void make_set(string v) {
+    parent[v] = v;
+    set_size[v] = 1;
+}
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -47,18 +42,17 @@ int main() {
         string command, a, b;
         cin >> command >> a >> b;
         if (command == "connect") {
-            if (!g.contains(a)) {
-                g.insert(a);
-            }
-            if (!g.contains(b)) {
-                g.insert(b);
-            }
-            g.join(a, b);
+            if (find_set(a) == NONE) make_set(a);
+            if (find_set(b) == NONE) make_set(b);
+            union_sets(a, b);
         } else /*if (command == "sending")*/ {
-            if (!g.contains(a) || !g.contains(b)) {
+            auto a_set = find_set(a);
+            auto b_set = find_set(b);
+
+            if (a != b && (a_set == NONE || b_set == NONE)) {
                 cout << "Nie\n";
             } else {
-                cout << (g.find(a) == g.find(b)? "Tak" : "Nie") << "\n";
+                cout << (a_set == b_set? "Tak" : "Nie") << "\n";
             }
         }
     }
