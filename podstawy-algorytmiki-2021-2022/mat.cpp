@@ -16,9 +16,7 @@ int num_disconnected;
 int n, m, k;
 
 int find_set(int v) {
-    return (v == rep[v])
-        ? v
-        : rep[v] = find_set(rep[v]);
+    return (v == rep[v])? v : rep[v] = find_set(rep[v]);
 }
 
 void union_sets(int x, int y) {
